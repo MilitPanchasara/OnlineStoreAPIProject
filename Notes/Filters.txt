@@ -1,0 +1,18 @@
+﻿- Only available for MVC
+
+- Type of filters:
+-- Authorization filters
+-- Resource filters
+-- Action filters
+-- exception filters
+-- Result filters
+
+- OnResourceExecuting Resource filter runs immediately after auth. filter
+- OnResourceExecuted Resource filter runs after whole pipeline (last one)
+
+- Action filter runs before or after action (controller call) completes
+
+- Either use all async filters or use sync. filters, DO NOT MIX both
+
+- Action filter Can be defined at Startup.cs, on Controller, on Method
+

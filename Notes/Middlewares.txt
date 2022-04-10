@@ -1,0 +1,3 @@
+﻿- Can only define globally, unlike filters (in mvc, filters can be used at controller or method level)
+
+- 
