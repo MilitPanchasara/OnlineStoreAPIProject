@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using OnlineStore.Domain;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,8 +18,13 @@ namespace OnlineStore.Middlewares
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, ITestService testService)
         {
+            #region calling service from middleware
+            testService.setTestCount(100);
+            var demoString = testService.getTestCount();
+            #endregion
+
             var cultureQuery = context.Request.Query["culture"];
             if (!string.IsNullOrWhiteSpace(cultureQuery))
             {

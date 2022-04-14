@@ -4,6 +4,7 @@ namespace OnlineStore
 {
     public class WeatherForecast
     {
+        public int TestCount { get; set; }
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

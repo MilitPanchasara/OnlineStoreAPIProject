@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineStore.Domain;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,10 +19,12 @@ namespace OnlineStore.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ITestService _testService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ITestService testService)
         {
             _logger = logger;
+            _testService = testService;
         }
 
         [HttpGet]
@@ -31,6 +34,7 @@ namespace OnlineStore.Controllers
             var x = CultureInfo.CurrentCulture.DisplayName;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
+                TestCount = _testService.getTestCount(),
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
