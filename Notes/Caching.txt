@@ -1,0 +1,17 @@
+﻿https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-6.0
+
+Distributed Caches:
+1. Distributed Memory Cache
+2. Distributed SQL Server cache
+3. Distributed Redis cache
+4. Distributed NCache cache - https://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html
+
+
+
+Sql Server cache:
+- COMMAND: dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
+
+RESPONSE CACHING:
+ - Conditions:
+	https://docs.microsoft.com/en-us/aspnet/core/performance/caching/middleware?view=aspnetcore-6.0#conditions-for-caching
+
