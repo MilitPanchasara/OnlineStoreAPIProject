@@ -1,0 +1,14 @@
+﻿- Not compatible with .Net 5
+
+
+- works with .Net Core 3.1
+
+- https://docs.nunit.org/articles/nunit/writing-tests/attributes.html
+
+- Use Test explorer to run tests
+
+
+* TO RUN TESTS IN AZURE PIPELINE
+
+- https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#run-your-tests
+- https://stackoverflow.com/questions/65089885/run-nunit-tests-in-azure-devops-pipeline

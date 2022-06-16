@@ -1,0 +1,3 @@
+﻿https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-6.0
+
+https://www.syncfusion.com/blogs/post/automatically-generate-api-docs-for-asp-net-core.aspx

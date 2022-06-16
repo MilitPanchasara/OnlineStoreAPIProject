@@ -10,14 +10,14 @@ namespace OnlineStore.Controllers
 {
     [Route("api/[controller]")]
     //[Route("api/{v:apiVersion}/[controller]")]  ----- URL Base
-    //[ApiVersion("1.0")]  ----- Query String Base
+    //[ApiVersion("1.0")]  ----- Query String Base & DEFAULT VERSION
     [ApiController]
     public class ProductsController : ControllerBase
     {
         private IMemoryCache _memoryCache;
 
         public ProductsController(IMemoryCache memoryCache)
-        {
+        {   
             _memoryCache = memoryCache;
         }
 

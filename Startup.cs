@@ -38,6 +38,7 @@ namespace OnlineStore
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineStore", Version = "v1" });
+                c.ResolveConflictingActions(c => c.Last()); // takes latest version of API if there's conflict due to same action names while API versioning
             });
 
             // FOR MEMORY CACHING

@@ -1,0 +1,24 @@
+﻿https://learning.postman.com/docs/writing-scripts/intro-to-scripts/\
+
+Syntax:
+
+- Validating responses:
+
+pm.test("Status test", function () {
+    pm.response.to.have.status(200);
+});
+
+- Formatting test result messages with pm.expect
+
+pm.test("environment to be production", function () {
+    pm.expect(pm.environment.get("env")).to.equal("production");
+
+
+    - Other sentences
+    pm.response.to.not.be.error;
+    pm.response.to.have.jsonBody("");
+    pm.response.to.not.have.jsonBody("error");
+    pm.response.to.be.ok;
+    pm.response.to.be.withBody;
+    pm.response.to.be.json;
+});

@@ -1,1 +1,9 @@
-﻿https://www.c-sharpcorner.com/article/api-versioning-in-asp-net-core-web-api/
+﻿https://docs.microsoft.com/en-us/shows/visual-studio-toolbox/versioning-aspnet-core-services (Video tutorial)
+
+https://www.c-sharpcorner.com/article/api-versioning-in-asp-net-core-web-api/
+
+3 ways to use:
+
+1. Using Header
+2. Using query string
+3. Using Url
