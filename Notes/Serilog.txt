@@ -1,0 +1,1 @@
+﻿https://blog.fabritglobal.com/database-logging-serilog-asp-net-core/

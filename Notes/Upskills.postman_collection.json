@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "bde1ad86-ecc6-495d-9ef6-a4072fcf9d87",
+		"name": "Upskills",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:44359/api/User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InVzZXIxIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNjU2MjMzMTAyLCJleHAiOjE2NTYzMTk1MDEsImlhdCI6MTY1NjIzMzEwMn0.ZHRMId6EIAtEpBBUt8fsCdij32jlHqKJBMysmHoL-QA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-version",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44359/api/User",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"api",
+						"User"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

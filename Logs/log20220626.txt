@@ -1,0 +1,4 @@
+2022-06-26 14:12:33 [INF] Application is starting
+2022-06-26 14:13:21 [INF] Application is starting
+2022-06-26 14:18:57 [INF] Application is starting
+2022-06-26 14:36:47 [INF] Application is starting

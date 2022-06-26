@@ -1,0 +1,1 @@
+2022-06-16 01:06:36 [INF] Application is starting

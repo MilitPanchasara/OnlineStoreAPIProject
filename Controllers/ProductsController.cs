@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -11,6 +12,7 @@ namespace OnlineStore.Controllers
     [Route("api/[controller]")]
     //[Route("api/{v:apiVersion}/[controller]")]  ----- URL Base
     //[ApiVersion("1.0")]  ----- Query String Base & DEFAULT VERSION
+    //[Authorize(Policy = "EmployeeOnly")] ------ Policy based Auth
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -55,15 +57,15 @@ namespace OnlineStore.Controllers
             return res;
         }
 
-        [NonAction]
-        private static void PostEvictionCallback(object cacheKey, object cacheValue, EvictionReason evictionReason, object state)
-        {
-            var memoryCache = (IMemoryCache)state;
+        //[NonAction]
+        //private static void PostEvictionCallback(object cacheKey, object cacheValue, EvictionReason evictionReason, object state)
+        //{
+        //    var memoryCache = (IMemoryCache)state;
 
-            memoryCache.Set(
-                "EvictionMessages",
-                $"Entry {cacheKey} was evicted: {evictionReason}.");
-        }
+        //    memoryCache.Set(
+        //        "EvictionMessages",
+        //        $"Entry {cacheKey} was evicted: {evictionReason}.");
+        //}
 
         [HttpGet("GetWithError")]
         public void GetWithError()

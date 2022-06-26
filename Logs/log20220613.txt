@@ -1,0 +1,6 @@
+ [] Application is starting
+2022-06-13 00:19:09 [INF] Application is starting
+2022-06-13 00:19:53 [INF] Application is starting
+2022-06-13 00:20:39 [FTL] Application failed to start
+System.Exception: Exception of type 'System.Exception' was thrown.
+   at OnlineStore.Program.Main(String[] args) in C:\Users\Milit\source\repos\DotNet Core Professional\Milestone 1\OnlineStore\Program.cs:line 28

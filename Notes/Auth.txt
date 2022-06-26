@@ -5,3 +5,16 @@ https://www.codemag.com/Article/2105051/Implementing-JWT-Authentication-in-ASP.N
 https://code-maze.com/authentication-aspnetcore-jwt-1/
 
 https://www.c-sharpcorner.com/article/authentication-and-authorization-in-asp-net-core-web-api-with-json-web-tokens/
+
+
+STEPS FOR JWT:
+
+1. Install 2 packages: JwtBearer, IdentityModel.Tokens.JWT
+
+2. Configure Credentials in appsettings.json
+
+3. Configure JWT service and Auth. to pipeline in Startup
+
+4. Configure function to create tokens with Claims
+
+5. Add [Authorize on required controllers with Roles]

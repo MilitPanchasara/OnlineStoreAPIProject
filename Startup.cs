@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineStore.Domain;
 using OnlineStore.Middlewares;
@@ -15,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStore
@@ -40,6 +44,40 @@ namespace OnlineStore
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineStore", Version = "v1" });
                 c.ResolveConflictingActions(c => c.Last()); // takes latest version of API if there's conflict due to same action names while API versioning
             });
+
+            // POLICY BASED AUTH
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AtLeast21", policy =>
+            //        policy.Requirements.Add(new MinimumAgeRequirement(21)));
+            //});
+            //services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+            //});
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.SaveToken = true;
+                var Key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JWT:Issuer"],
+                    ValidAudience = Configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Key)
+                };
+            });
+
+            services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
 
             // FOR MEMORY CACHING
             services.AddMemoryCache();
@@ -95,7 +133,7 @@ namespace OnlineStore
 
             //    await next();
             //});
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //app.UseShortCircuitMiddleware();
@@ -118,6 +156,16 @@ namespace OnlineStore
 
             //    app.UseRewriter(options);
             //}
+
+
+
+            app.Use(async (context, next) =>
+            {
+                /// YOUR MIDDLEWAER
+                await next.Invoke();
+            });
+
+            app.UseMiddleware<Test1Middleware>();
 
             app.UseEndpoints(endpoints =>
             {
