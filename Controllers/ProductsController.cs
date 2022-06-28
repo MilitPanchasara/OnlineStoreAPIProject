@@ -11,8 +11,9 @@ namespace OnlineStore.Controllers
 {
     [Route("api/[controller]")]
     //[Route("api/{v:apiVersion}/[controller]")]  ----- URL Base
-    //[ApiVersion("1.0")]  ----- Query String Base & DEFAULT VERSION
+    [ApiVersion("1.0")]  // controller level versioning
     //[Authorize(Policy = "EmployeeOnly")] ------ Policy based Auth
+    [Authorize(Policy = "AtLeast18")] //------ Policy based Auth
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -26,7 +27,7 @@ namespace OnlineStore.Controllers
         [HttpGet]
         public object Get()
         {
-            var cacheKey = "employeeList";
+            var cacheKey = "productList";
             object res;
             //checks if cache entries exists
             if (!_memoryCache.TryGetValue(cacheKey, out List<string> productList))
@@ -37,7 +38,7 @@ namespace OnlineStore.Controllers
                 //setting up cache options
                 var cacheExpiryOptions = new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpiration = DateTime.Now.AddDays(1),
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(30),
                     Priority = CacheItemPriority.High,
                     SlidingExpiration = TimeSpan.FromSeconds(20),
                 };
@@ -46,7 +47,42 @@ namespace OnlineStore.Controllers
                 
                 
                 //setting cache entries
-                _memoryCache.Set(cacheKey, productList);
+                _memoryCache.Set(cacheKey, productList, cacheExpiryOptions); // SET WITH OPTIONS DEFINED ABOVE
+                res = (object)productList;
+            }
+            else
+            {
+                res = _memoryCache.Get(cacheKey);
+            }
+
+            return res;
+        }
+
+        [MapToApiVersion("2.0")] // for particular action
+        [HttpGet]
+        public object GetV2()
+        {
+            var cacheKey = "productList";
+            object res;
+            //checks if cache entries exists
+            if (!_memoryCache.TryGetValue(cacheKey, out List<string> productList))
+            {
+                //calling the server
+                productList = new List<string>() { "P12", "P22", "P32" };
+
+                //setting up cache options
+                var cacheExpiryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(30),
+                    Priority = CacheItemPriority.High,
+                    SlidingExpiration = TimeSpan.FromSeconds(20),
+                };
+                //cacheExpiryOptions.RegisterPostEvictionCallback(PostEvictionCallback, _memoryCache);
+
+
+
+                //setting cache entries
+                _memoryCache.Set(cacheKey, productList, cacheExpiryOptions); // SET WITH OPTIONS DEFINED ABOVE
                 res = (object)productList;
             }
             else

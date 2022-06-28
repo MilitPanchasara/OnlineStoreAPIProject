@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineStore.Domain;
 using OnlineStore.Middlewares;
+using OnlineStore.Validators;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,12 +47,12 @@ namespace OnlineStore
             });
 
             // POLICY BASED AUTH
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("AtLeast21", policy =>
-            //        policy.Requirements.Add(new MinimumAgeRequirement(21)));
-            //});
-            //services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AtLeast18", policy =>
+                    policy.Requirements.Add(new AuthAgeRequirement(18)));
+            });
+            services.AddSingleton<IAuthorizationHandler, AuthAgeHandler>();
 
             //services.AddAuthorization(options =>
             //{
@@ -87,7 +88,7 @@ namespace OnlineStore
 
             services.AddApiVersioning(x =>
             {
-                x.DefaultApiVersion = new ApiVersion(1, 1);
+                x.DefaultApiVersion = new ApiVersion(1, 0);
                 x.AssumeDefaultVersionWhenUnspecified = true; //If we haven't set this flag to true and client hit the API without mentioning the version then UnsupportedApiVersion exception occurs.
                 x.ReportApiVersions = true; //To return the API version in response header.
                 x.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
