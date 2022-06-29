@@ -1,3 +1,5 @@
 ﻿https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-5.0
+ 
+ https://www.yogihosting.com/how-to-use-globalization-and-localization-in-asp-net-core/
 
 Used in MVC applications
